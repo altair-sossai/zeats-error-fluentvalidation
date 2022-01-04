@@ -1,19 +1,20 @@
 ﻿using System.Linq;
 using FluentValidation;
 
-namespace Zeats.Error.FluentValidation.Extensions;
-
-public static class ValidationExceptionExtensions
+namespace Zeats.Error.FluentValidation.Extensions
 {
-    public static ErrorInfo ToErrorInfo(this ValidationException exception)
+    public static class ValidationExceptionExtensions
     {
-        return new ErrorInfo
+        public static ErrorInfo ToErrorInfo(this ValidationException exception)
         {
-            Severity = Severity.Error,
-            Type = "Validation",
-            Message = exception.Message,
-            Details = exception.ToString(),
-            Errors = exception.Errors?.Select(error => error.ToErrorItem()).ToList()
-        };
+            return new ErrorInfo
+            {
+                Severity = Severity.Error,
+                Type = "Validation",
+                Message = exception.Message,
+                Details = exception.ToString(),
+                Errors = exception.Errors?.Select(error => error.ToErrorItem()).ToList()
+            };
+        }
     }
 }

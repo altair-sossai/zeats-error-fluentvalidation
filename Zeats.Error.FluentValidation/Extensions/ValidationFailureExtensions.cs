@@ -1,17 +1,18 @@
 ﻿using FluentValidation.Results;
 
-namespace Zeats.Error.FluentValidation.Extensions;
-
-public static class ValidationFailureExtensions
+namespace Zeats.Error.FluentValidation.Extensions
 {
-    public static ErrorItem ToErrorItem(this ValidationFailure validationFailure)
+    public static class ValidationFailureExtensions
     {
-        return new ErrorItem
+        public static ErrorItem ToErrorItem(this ValidationFailure validationFailure)
         {
-            Severity = (Severity) validationFailure.Severity,
-            Type = "Validation",
-            Property = validationFailure.PropertyName,
-            Message = validationFailure.ErrorMessage
-        };
+            return new ErrorItem
+            {
+                Severity = (Severity) validationFailure.Severity,
+                Type = "Validation",
+                Property = validationFailure.PropertyName,
+                Message = validationFailure.ErrorMessage
+            };
+        }
     }
 }
